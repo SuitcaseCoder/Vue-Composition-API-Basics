@@ -22,13 +22,29 @@
 </template>
 
 <script setup>
-import { reactive, computed, watch } from 'vue'
 
-    const appTitle = 'My Amazing Counter App'
+/*
+IMPORTS 
+*/
 
+import { reactive, computed, watch, onMounted } from 'vue'
+
+/*
+  APP TITLE
+*/
+
+  const appTitle = 'My Amazing Counter App'
+
+    onMounted(()=>{
+      console.log("do stuff related to App title")
+    })
     // const counter = ref(0)
     // const counterTitle = ref('My Counter')
 
+
+/*
+  COUNTER
+*/
     const counterData = reactive({
       count: 0, 
       title: 'My Counter'
@@ -58,6 +74,46 @@ import { reactive, computed, watch } from 'vue'
     const decreaseCounter = (amount) => {
       counterData.count -= amount
     }
+
+    onMounted(()=>{
+      console.log("do stuff related to counter")
+    })
+
+    // onBeforeUpdate(() => {
+    //   console.log("onBeforeUpdate")
+    // })
+
+    // onUpdated(() => {
+    //   console.log("onUpdated")
+    // })
+
+
+
+
+// // lifecycle hooks
+//     onBeforeMount(() => {
+//       console.log("onBeforeMount");
+//     })
+
+//     onMounted(() => {
+//       console.log("onMounted");
+//     })
+
+//     onBeforeUnmount(() => {
+//       console.log("onBeforeUnmount");
+//     })
+
+//     onUnmounted(() => {
+//       console.log("onUnmounted");
+//     })
+
+//     onActivated(() => {
+//       console.log("onActivated");
+//     })
+
+//     onDeactivated(() => {
+//       console.log("onDeactivated");
+//     })
 
 </script>
 
