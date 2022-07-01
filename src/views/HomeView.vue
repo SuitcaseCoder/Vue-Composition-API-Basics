@@ -16,7 +16,7 @@
 
     <div class="edit">
       <h4>Edit counter title:</h4>
-      <input v-model="counterData.title" type="text">
+      <input v-model="counterData.title" type="text" v-autofocus>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ IMPORTS
 */
 
 import { reactive, computed, watch, onMounted } from 'vue'
-
+import { vAutofocus } from '@/directives/vAutofocus'
 /*
   APP TITLE
 */
@@ -78,6 +78,7 @@ import { reactive, computed, watch, onMounted } from 'vue'
     onMounted(()=>{
       console.log("do stuff related to counter")
     })
+
 
     // onBeforeUpdate(() => {
     //   console.log("onBeforeUpdate")
