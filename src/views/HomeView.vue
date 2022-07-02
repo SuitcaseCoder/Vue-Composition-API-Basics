@@ -10,7 +10,7 @@
       <button @click="decreaseCounter(1)" class="btn">-</button>
       <span class="counter">{{ counterData.count }}</span>
       <button @click="increaseCounter(1, $event)" class="btn">+</button>
-      <button @click="increaseCounter(2)" class="btn">++</button>
+      <button @click="ncreaseCounter(2)" class="btn">++</button>
     </div>
 
     <p>This counter is {{ oddOrEven }}</p>
@@ -28,7 +28,8 @@
 IMPORTS 
 */
 
-import { ref, reactive, computed, watch, onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useCounter } from '@/use/useCounter'
 import { vAutofocus } from '@/directives/vAutofocus'
 /*
   APP TITLE
@@ -41,88 +42,9 @@ import { vAutofocus } from '@/directives/vAutofocus'
     onMounted(()=>{
       console.log(`The app title is: ${appTitleRef.value.offsetWidth} px wide`)
     })
-    // const counter = ref(0)
-    // const counterTitle = ref('My Counter')
 
-
-/*
-  COUNTER
-*/
-    const counterData = reactive({
-      count: 0, 
-      title: 'My Counter'
-    })
-
-    watch(() => counterData.count, (newCount, oldCount)=>{
-      console.log('newCount: ', newCount )
-      console.log('oldCount: ', oldCount )
-
-      if( newCount === 20){
-        alert('Way to go loser! you made it to 20')
-      }
-    } )
-
-    const oddOrEven = computed(() => {
-      if (counterData.count % 2 === 0){
-        return 'even'
-      } else { 
-        return 'odd' 
-        }
-    })
-
-// can do with or without the async/await
-    const increaseCounter = async (amount, e) => {
-      counterData.count += amount
-
-      await nextTick(() => {
-        console.log("do something when counter has updated on dom")
-      })
-    }
-
-    const decreaseCounter = (amount) => {
-      counterData.count -= amount
-    }
-
-    onMounted(()=>{
-      console.log("do stuff related to counter")
-    })
-
-
-    // onBeforeUpdate(() => {
-    //   console.log("onBeforeUpdate")
-    // })
-
-    // onUpdated(() => {
-    //   console.log("onUpdated")
-    // })
-
-
-
-
-// // lifecycle hooks
-//     onBeforeMount(() => {
-//       console.log("onBeforeMount");
-//     })
-
-//     onMounted(() => {
-//       console.log("onMounted");
-//     })
-
-//     onBeforeUnmount(() => {
-//       console.log("onBeforeUnmount");
-//     })
-
-//     onUnmounted(() => {
-//       console.log("onUnmounted");
-//     })
-
-//     onActivated(() => {
-//       console.log("onActivated");
-//     })
-
-//     onDeactivated(() => {
-//       console.log("onDeactivated");
-//     })
+/* counter */
+const { counterData, oddOrEven, increaseCounter, decreaseCounter} = useCounter()
 
 </script>
 
