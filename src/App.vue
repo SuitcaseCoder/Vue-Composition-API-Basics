@@ -1,17 +1,37 @@
 <template>
+  <div class="user-data">
+    {{ userData.name }} @{{ userData.username }}
+  </div>
   <nav>
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/modals">Modals</RouterLink>
     <RouterLink to="/posts">Posts</RouterLink>
   </nav>
 
-  <router-view v-slot="{ Component }">
+  <RouterView />
+
+  <!-- <router-view v-slot="{ Component }">
     <keep-alive>
       <component :is="Component" />
     </keep-alive>
-  </router-view>
+  </router-view> -->
 
 </template>
+
+<script setup>
+/* imports */ 
+import { reactive, provide } from 'vue'
+
+/* user data */
+const userData = reactive({
+  name: 'Laura',
+  username: 'lauraruizroehrs'
+})
+
+// the first param is a placeholder name the second is the actual object getting passed in
+provide('userData', userData)
+
+</script>
 
 <style>
 @import "@/assets/base.css";
@@ -70,5 +90,14 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.user-data {
+  position: absolute;
+  background: beige;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  padding: 5px;
 }
 </style>
