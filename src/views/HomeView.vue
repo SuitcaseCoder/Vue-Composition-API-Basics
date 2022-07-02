@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h2>{{ appTitle }}</h2>
+
+    <h2 ref="appTitleRef">{{ appTitle }}</h2>
 
     <h3> {{ counterData.title }}:  </h3>
 
@@ -27,16 +28,18 @@
 IMPORTS 
 */
 
-import { reactive, computed, watch, onMounted } from 'vue'
+import { ref, reactive, computed, watch, onMounted, nextTick } from 'vue'
 import { vAutofocus } from '@/directives/vAutofocus'
 /*
   APP TITLE
 */
 
   const appTitle = 'My Amazing Counter App'
+  
+  const appTitleRef = ref(null)
 
     onMounted(()=>{
-      console.log("do stuff related to App title")
+      console.log(`The app title is: ${appTitleRef.value.offsetWidth} px wide`)
     })
     // const counter = ref(0)
     // const counterTitle = ref('My Counter')
@@ -67,8 +70,13 @@ import { vAutofocus } from '@/directives/vAutofocus'
         }
     })
 
-    const increaseCounter = (amount, e) => {
+// can do with or without the async/await
+    const increaseCounter = async (amount, e) => {
       counterData.count += amount
+
+      await nextTick(() => {
+        console.log("do something when counter has updated on dom")
+      })
     }
 
     const decreaseCounter = (amount) => {
